@@ -55,7 +55,8 @@ public class AppController {
 		String imageLink = clMap.get("url").toString();
 		String imagePublicId = clMap.get("public_id").toString();
 		BookDAO bookDAO = new BookDAO(imageLink, imagePublicId, bookDTO.getTitle(), bookDTO.getAuthor(),
-				bookDTO.getPublisher(), bookDTO.getReleaseYear(), bookDTO.getNumOfPage(), bookDTO.getPrice());
+				bookDTO.getPublisher(), bookDTO.getReleaseYear(), bookDTO.getNumOfPage(), bookDTO.getPrice(),
+				bookDTO.getDescription(), bookDTO.getCategoty(), bookDTO.getRateStar(), bookDTO.getNumOfReview());
 		bookRepository.save(bookDAO);
 		return bookDAO;
 	}
@@ -94,6 +95,10 @@ public class AppController {
 		bookDAO.setReleaseYear(bookDTO.getReleaseYear());
 		bookDAO.setNumOfPage(bookDTO.getNumOfPage());
 		bookDAO.setPrice(bookDTO.getPrice());
+		bookDAO.setDescription(bookDTO.getDescription());
+		bookDAO.setCategoty(bookDTO.getCategoty());
+		bookDAO.setRateStar(bookDTO.getRateStar());
+		bookDAO.setNumOfReview(bookDTO.getNumOfReview());
 		bookRepository.save(bookDAO);
 		return bookDAO;
 	}

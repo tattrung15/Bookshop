@@ -48,12 +48,26 @@ public class BookDAO{
 	
 	@Column(nullable = false)
     private long price;
+	
+	@Column(nullable = false)
+	@Nationalized
+	private String description;
+    
+	@Column(nullable = false)
+	@Nationalized
+    private String categoty;
+    
+	@Column(nullable = false)
+    private int rateStar;
+    
+	@Column(nullable = false)
+    private int numOfReview;
 
 	public BookDAO() {
 	}
 
 	public BookDAO(String imageLink, String imagePublicId, String title, String author, String publisher,
-			int releaseYear, int numOfPage, long price) {
+			int releaseYear, int numOfPage, long price, String description, String categoty, int rateStar, int numOfReview) {
 		this.imageLink = imageLink;
 		this.imagePublicId = imagePublicId;
 		this.title = title;
@@ -62,6 +76,10 @@ public class BookDAO{
 		this.releaseYear = releaseYear;
 		this.numOfPage = numOfPage;
 		this.price = price;
+		this.description = description;
+		this.categoty = categoty;
+		this.rateStar = rateStar;
+		this.numOfReview = numOfReview;
 	}
 
 	public Long getId() {
@@ -134,5 +152,37 @@ public class BookDAO{
 
 	public void setPrice(long price) {
 		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCategoty() {
+		return categoty;
+	}
+
+	public void setCategoty(String categoty) {
+		this.categoty = categoty;
+	}
+
+	public int getRateStar() {
+		return rateStar;
+	}
+
+	public void setRateStar(int rateStar) {
+		this.rateStar = rateStar;
+	}
+
+	public int getNumOfReview() {
+		return numOfReview;
+	}
+
+	public void setNumOfReview(int numOfReview) {
+		this.numOfReview = numOfReview;
 	}
 }

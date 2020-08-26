@@ -17,6 +17,14 @@ public class BookDTO{
     private int numOfPage;
 	
     private long price;
+    
+    private String description;
+    
+    private String categoty;
+    
+    private int rateStar;
+    
+    private int numOfReview;
 
 	public Long getId() {
 		return id;
@@ -80,5 +88,37 @@ public class BookDTO{
 
 	public void setPrice(long price) {
 		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCategoty() {
+		return categoty;
+	}
+
+	public void setCategoty(String categoty) {
+		this.categoty = categoty;
+	}
+
+	public int getRateStar() {
+		return rateStar;
+	}
+
+	public void setRateStar(int rateStar) {
+		this.rateStar = rateStar;
+	}
+
+	public int getNumOfReview() {
+		return numOfReview;
+	}
+
+	public void setNumOfReview(int numOfReview) {
+		this.numOfReview = numOfReview;
 	}
 }
