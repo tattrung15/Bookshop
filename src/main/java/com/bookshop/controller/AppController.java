@@ -43,16 +43,16 @@ public class AppController {
 		return bookRepository.findAll();
 	}
 	
-	@RequestMapping(value = "/api/book/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.GET)
 	public BookDAO findBook(@PathVariable("id") Long id) {
 		Optional<BookDAO> bookDAO = bookRepository.findById(id);
 		return bookDAO.get();
 	}
 	
-	@RequestMapping(value = "/api/book", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/books", method = RequestMethod.POST)
 	public BookDAO addBook(@RequestBody BookDTO bookDTO) throws IOException{
 		Map<?, ?> clMap = cloudinary.uploader().upload(bookDTO.getImageLink(), ObjectUtils.emptyMap());
-		String imageLink = clMap.get("url").toString();
+		String imageLink = clMap.get("secure_url").toString();
 		String imagePublicId = clMap.get("public_id").toString();
 		BookDAO bookDAO = new BookDAO(imageLink, imagePublicId, bookDTO.getTitle(), bookDTO.getAuthor(),
 				bookDTO.getPublisher(), bookDTO.getReleaseYear(), bookDTO.getNumOfPage(), bookDTO.getPrice(),
@@ -61,7 +61,7 @@ public class AppController {
 		return bookDAO;
 	}
 	
-	@RequestMapping(value = "/api/book/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteBook(@PathVariable("id") Long id) throws IOException {
 		BookDAO bookDAO = bookRepository.getOne(id);
 		cloudinary.uploader().destroy(bookDAO.getImagePublicId(), ObjectUtils.emptyMap());
@@ -69,11 +69,11 @@ public class AppController {
 		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/api/book", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/api/books", method = RequestMethod.PATCH)
 	public BookDAO editBook(@RequestBody BookDTO bookDTO) throws IOException {
 		BookDAO bookDAO = bookRepository.getOne(bookDTO.getId());
 		
-		String regex = "^http:\\/\\/res.cloudinary.com";
+		String regex = "^https://res.cloudinary.com";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(bookDTO.getImageLink());
 
@@ -82,7 +82,7 @@ public class AppController {
         if (!matcher.find()) {
         	cloudinary.uploader().destroy(imagePublicId, ObjectUtils.emptyMap());
         	Map<?, ?> clMap = cloudinary.uploader().upload(bookDTO.getImageLink(), ObjectUtils.emptyMap());
-			imageLink = clMap.get("url").toString();
+			imageLink = clMap.get("secure_url").toString();
 			imagePublicId = clMap.get("public_id").toString();
 		}
 		
