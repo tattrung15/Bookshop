@@ -11,6 +11,8 @@ import org.hibernate.annotations.Nationalized;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "book")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
@@ -20,6 +22,7 @@ public class BookDAO{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@ApiModelProperty(notes = "Base64 image")
 	@Column(nullable = false)
 	@Nationalized
 	private String imageLink;
@@ -41,13 +44,13 @@ public class BookDAO{
     private String publisher;
 	
 	@Column(nullable = false)
-    private int releaseYear;
+    private Integer releaseYear;
 	
 	@Column(nullable = false)
-    private int numOfPage;
+    private Integer numOfPage;
 	
 	@Column(nullable = false)
-    private long price;
+    private Long price;
 	
 	@Column(nullable = false)
 	@Nationalized
@@ -58,16 +61,16 @@ public class BookDAO{
     private String categoty;
     
 	@Column(nullable = false)
-    private int rateStar;
+    private Integer rateStar;
     
 	@Column(nullable = false)
-    private int numOfReview;
+    private Integer numOfReview;
 
 	public BookDAO() {
 	}
 
 	public BookDAO(String imageLink, String imagePublicId, String title, String author, String publisher,
-			int releaseYear, int numOfPage, long price, String description, String categoty, int rateStar, int numOfReview) {
+			int releaseYear, Integer numOfPage, Long price, String description, String categoty, Integer rateStar, Integer numOfReview) {
 		this.imageLink = imageLink;
 		this.imagePublicId = imagePublicId;
 		this.title = title;
@@ -130,27 +133,27 @@ public class BookDAO{
 		this.publisher = publisher;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(int releaseYear) {
+	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
-	public int getNumOfPage() {
+	public Integer getNumOfPage() {
 		return numOfPage;
 	}
 
-	public void setNumOfPage(int numOfPage) {
+	public void setNumOfPage(Integer numOfPage) {
 		this.numOfPage = numOfPage;
 	}
 
-	public long getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 
@@ -170,19 +173,19 @@ public class BookDAO{
 		this.categoty = categoty;
 	}
 
-	public int getRateStar() {
+	public Integer getRateStar() {
 		return rateStar;
 	}
 
-	public void setRateStar(int rateStar) {
+	public void setRateStar(Integer rateStar) {
 		this.rateStar = rateStar;
 	}
 
-	public int getNumOfReview() {
+	public Integer getNumOfReview() {
 		return numOfReview;
 	}
 
-	public void setNumOfReview(int numOfReview) {
+	public void setNumOfReview(Integer numOfReview) {
 		this.numOfReview = numOfReview;
 	}
 }

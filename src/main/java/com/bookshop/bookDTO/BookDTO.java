@@ -1,9 +1,6 @@
 package com.bookshop.bookDTO;
 
 public class BookDTO{
-	
-	private Long id;
-	
 	private String imageLink;
 	
 	private String title;
@@ -12,27 +9,19 @@ public class BookDTO{
 	
     private String publisher;
 	
-    private int releaseYear;
+    private Integer releaseYear;
 	
-    private int numOfPage;
+    private Integer numOfPage;
 	
-    private long price;
+    private Long price;
     
     private String description;
     
     private String categoty;
     
-    private int rateStar;
+    private Integer rateStar;
     
-    private int numOfReview;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private Integer numOfReview;
 
 	public String getImageLink() {
 		return imageLink;
@@ -66,27 +55,27 @@ public class BookDTO{
 		this.publisher = publisher;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(int releaseYear) {
+	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
-	public int getNumOfPage() {
+	public Integer getNumOfPage() {
 		return numOfPage;
 	}
 
-	public void setNumOfPage(int numOfPage) {
+	public void setNumOfPage(Integer numOfPage) {
 		this.numOfPage = numOfPage;
 	}
 
-	public long getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 
@@ -106,19 +95,19 @@ public class BookDTO{
 		this.categoty = categoty;
 	}
 
-	public int getRateStar() {
+	public Integer getRateStar() {
 		return rateStar;
 	}
 
-	public void setRateStar(int rateStar) {
+	public void setRateStar(Integer rateStar) {
 		this.rateStar = rateStar;
 	}
 
-	public int getNumOfReview() {
+	public Integer getNumOfReview() {
 		return numOfReview;
 	}
 
-	public void setNumOfReview(int numOfReview) {
+	public void setNumOfReview(Integer numOfReview) {
 		this.numOfReview = numOfReview;
 	}
 }

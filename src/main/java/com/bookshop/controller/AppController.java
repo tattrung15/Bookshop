@@ -69,36 +69,57 @@ public class AppController {
 		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/api/books", method = RequestMethod.PATCH)
-	public BookDAO editBook(@RequestBody BookDTO bookDTO) throws IOException {
-		BookDAO bookDAO = bookRepository.getOne(bookDTO.getId());
+	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.PATCH)
+	public BookDAO editBook(@RequestBody BookDTO bookDTO, @PathVariable("id") Long id) throws IOException {
+		BookDAO bookDAO = bookRepository.getOne(id);
 		
 		String regex = "^https://res.cloudinary.com";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(bookDTO.getImageLink());
 
-		String imageLink = bookDTO.getImageLink();
-		String imagePublicId = bookDAO.getImagePublicId();
-        if (!matcher.find()) {
-        	cloudinary.uploader().destroy(imagePublicId, ObjectUtils.emptyMap());
-        	Map<?, ?> clMap = cloudinary.uploader().upload(bookDTO.getImageLink(), ObjectUtils.emptyMap());
-			imageLink = clMap.get("secure_url").toString();
-			imagePublicId = clMap.get("public_id").toString();
+		if(bookDTO.getImageLink() != null) {
+			Matcher matcher = pattern.matcher(bookDTO.getImageLink());
+
+			String imageLink = bookDTO.getImageLink();
+			String imagePublicId = bookDAO.getImagePublicId();
+	        if (!matcher.find()) {
+	        	cloudinary.uploader().destroy(imagePublicId, ObjectUtils.emptyMap());
+	        	Map<?, ?> clMap = cloudinary.uploader().upload(bookDTO.getImageLink(), ObjectUtils.emptyMap());
+				imageLink = clMap.get("secure_url").toString();
+				imagePublicId = clMap.get("public_id").toString();
+			}
+			bookDAO.setImageLink(imageLink);
+			bookDAO.setImagePublicId(imagePublicId);
 		}
-		
-		bookDAO.setId(bookDTO.getId());
-		bookDAO.setImageLink(imageLink);
-		bookDAO.setImagePublicId(imagePublicId);
-		bookDAO.setTitle(bookDTO.getTitle());
-		bookDAO.setAuthor(bookDTO.getAuthor());
-		bookDAO.setPublisher(bookDTO.getPublisher());
-		bookDAO.setReleaseYear(bookDTO.getReleaseYear());
-		bookDAO.setNumOfPage(bookDTO.getNumOfPage());
-		bookDAO.setPrice(bookDTO.getPrice());
-		bookDAO.setDescription(bookDTO.getDescription());
-		bookDAO.setCategoty(bookDTO.getCategoty());
-		bookDAO.setRateStar(bookDTO.getRateStar());
-		bookDAO.setNumOfReview(bookDTO.getNumOfReview());
+		if(bookDTO.getTitle() != null) {
+			bookDAO.setTitle(bookDTO.getTitle());
+		}
+		if(bookDTO.getAuthor() != null) {
+			bookDAO.setAuthor(bookDTO.getAuthor());
+		}
+		if(bookDTO.getPublisher() != null) {
+			bookDAO.setPublisher(bookDTO.getPublisher());
+		}
+		if(bookDTO.getReleaseYear() != null){
+			bookDAO.setReleaseYear(bookDTO.getReleaseYear());
+		}
+		if(bookDTO.getNumOfPage() != null) {
+			bookDAO.setNumOfPage(bookDTO.getNumOfPage());
+		}
+		if(bookDTO.getPrice() != null) {
+			bookDAO.setPrice(bookDTO.getPrice());
+		}
+		if(bookDTO.getRateStar() != null) {
+			bookDAO.setRateStar(bookDTO.getRateStar());
+		}
+		if(bookDTO.getNumOfReview() != null) {
+			bookDAO.setNumOfReview(bookDTO.getNumOfReview());
+		}
+		if(bookDTO.getDescription() != null) {
+			bookDAO.setDescription(bookDTO.getDescription());
+		}
+		if(bookDTO.getCategoty() != null) {
+			bookDAO.setCategoty(bookDTO.getCategoty());
+		}
 		bookRepository.save(bookDAO);
 		return bookDAO;
 	}
